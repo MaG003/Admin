@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AppProvider } from './context/AppContext';
+import Sidebar from './components/Sidebar';
+import Header from './components/Header';
+import Home from './components/Home';
+import ManageMovies from './components/ManageMovies';
+import ManageUsers from './components/ManageUsers';
+import ManageShoppeLinks from './components/ManageShoppeLinks';
+import ManagePayments from './components/ManagePayments';
+import './style.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppProvider>
+      <Router>
+        <div className="app">
+          <Header />
+          <div className="main-content">
+            <Sidebar />
+            <div className="content">
+              <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route path="/manage-movies" element={<ManageMovies />} />
+                <Route path="/manage-users" element={<ManageUsers />} />
+                <Route path="/manage-shoppe-links" element={<ManageShoppeLinks />} />
+                <Route path="/manage-payments" element={<ManagePayments />} />
+              </Routes>
+            </div>
+          </div>
+        </div>
+      </Router>
+    </AppProvider>
   );
 }
 
